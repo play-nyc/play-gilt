@@ -10,8 +10,10 @@ class StoresSpec extends Specification {
   "Stores#activeSalesByKey" should {
 
     "be successful" in {
-      val res = controllers.Stores.activeSalesByKey("women")(FakeRequest())
-      status(res) must equalTo(OK)
+      running(FakeApplication()) {
+        val res = controllers.Stores.activeSalesByKey("women")(FakeRequest())
+        status(res) must equalTo(OK)
+      }
     }
 
   }
