@@ -1,0 +1,13 @@
+@(sales: Seq[Sale], store: String)
+
+@main(store) {
+
+    <ul class="active-sales">
+      @for(sale <- sales) {
+        <li class="sale" id="@sale.key">
+          <a href="@sale.giltUrl" class="url">@sale.name</a>
+        </li>
+      }
+    </ul>
+
+}

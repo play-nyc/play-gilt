@@ -20,7 +20,10 @@ object Stores extends Controller {
     Async {
       eventualResponse map { response =>
         response.status match {
-          case OK => Ok( unmarshalSales(response.json).toString )
+          case OK => {
+            val sales = unmarshalSales(response.json)
+            Ok(views.html.store(sales, store))
+          }
           case _ => Status(response.status) { response.body }
         }
       }
