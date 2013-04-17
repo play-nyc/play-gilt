@@ -6,6 +6,9 @@ import play.api.mvc._
 import scala.concurrent.Future
 import play.api.libs._
 import play.api.libs.concurrent.Execution.Implicits._
+import play.api.libs.json._
+
+import models.Sale
 
 object Stores extends Controller {
 
@@ -16,9 +19,19 @@ object Stores extends Controller {
 
     Async {
       eventualResponse map { response =>
-        Status(response.status) { response.body }
+        response.status match {
+          case OK => Ok( unmarshalSales(response.json).toString )
+          case _ => Status(response.status) { response.body }
+        }
       }
     }
+  }
+
+  private def unmarshalSales(json: JsValue): Seq[Sale] = {
+    (json \ "sales").validate[Seq[Sale]].fold(
+      err     => Nil,
+      success => success
+    )
   }
 
   private def signedApiRequest(path: String) = {
