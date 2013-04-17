@@ -1,0 +1,29 @@
+@gold: #c98702;
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  background: #f2f2f0;
+}
+
+.store-key, .active-sales {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.active-sales {
+  margin: 20px auto;
+  padding: 0;
+  list-style: none;
+
+  .sale {
+    padding: 5px 0;
+  }
+
+  a {
+    color: @gold;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
